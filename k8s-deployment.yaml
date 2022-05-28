@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-api-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: coffee-api
+        image: asia-southeast1-docker.pkg.dev/coffee-dev-351011/coffee/api
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffee-api-svc
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: api
+  ports:
+  - port: 1000
+    targetPort: 8080
+    nodePort: 30001
