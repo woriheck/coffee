@@ -1,0 +1,7 @@
+https://medium.com/hackernoon/today-i-learned-pull-docker-image-from-gcr-google-container-registry-in-any-non-gcp-kubernetes-5f8298f28969
+
+kubectl create secret docker-registry artifact-repo-key \
+  --docker-server=asia-southeast1-docker.pkg.dev \
+  --docker-username=_json_key \
+  --docker-password="$(cat $(pwd)/skaffold-svc-acc.json)" \
+  --docker-email=sy.erikchow@gmail.com
