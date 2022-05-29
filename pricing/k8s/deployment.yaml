@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-pricing-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coffee-pricing
+  template:
+    metadata:
+      labels:
+        app: coffee-pricing
+    spec:
+      containers:
+      - name: coffee-pricing
+        image: coffee-pricing
+      imagePullSecrets:
+      - name: artifact-repo-key
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: coffee-pricing-svc
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    app: coffee-pricing
+  ports:
+  - port: 1000
+    targetPort: 8080
+    nodePort: 30001

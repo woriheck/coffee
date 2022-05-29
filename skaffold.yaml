@@ -6,23 +6,35 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: coffee/api
-    docker:
-      dockerfile: Dockerfile.prod
+  
+  - image: coffee-pricing
+    context: pricing
     requires:
-    - image: coffee/api-builder
-      alias: BASE
+      - image: base
+        alias: BASE
+  
+  - image: coffee-product
+    context: product
+    requires:
+      - image: base
+        alias: BASE
 
-  - image: coffee/api-builder
-    docker:
-      cacheFrom:
-      # googleCloudBuild replaces cache references to the artifact image with
-      # the tagged image reference, useful for caching from the previous build.
-      - coffee/api-builder
-      dockerfile: Dockerfile
-  googleCloudBuild:
-    projectId: coffee-dev-351011
+  - image: base
+    context: base
+
+  # - image: coffee/api-builder
+  #   docker:
+  #     cacheFrom:
+  #     # googleCloudBuild replaces cache references to the artifact image with
+  #     # the tagged image reference, useful for caching from the previous build.
+  #     - coffee/api-builder
+  #     dockerfile: Dockerfile
+      
+
+  # googleCloudBuild:
+  #   projectId: coffee-dev-351011
 deploy:
   kubectl:
     manifests:
-    - k8s-deployment.yaml
+    - ./pricing/k8s/deployment.yaml
+    - ./product/k8s/deployment.yaml

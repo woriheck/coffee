@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: coffee-api-deployment
+  name: coffee-product-deployment
   namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      app: coffee-product
   template:
     metadata:
       labels:
-        app: api
+        app: coffee-product
     spec:
       containers:
-      - name: coffee-api
-        image: coffee/api
+      - name: coffee-product
+        image: coffee-product
       imagePullSecrets:
       - name: artifact-repo-key
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: coffee-api-svc
+  name: coffee-product-svc
   namespace: default
 spec:
   type: NodePort
   selector:
-    app: api
+    app: coffee-product
   ports:
   - port: 1000
     targetPort: 8080
-    nodePort: 30001
+    nodePort: 30002
