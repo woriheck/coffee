@@ -28,7 +28,7 @@ func HelloProduct(w http.ResponseWriter, r *http.Request) {
 	}
 	jsonOut, _ := json.Marshal(
 		Response{
-			Message:         "Product service",
+			Message:         "Product service!",
 			UpStreamMessage: mp,
 		},
 	)

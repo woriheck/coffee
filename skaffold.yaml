@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: coffee
 build:
+  # cluster:
+  #   namespace: istio-system
   tagPolicy:
     sha256: {}
   artifacts:

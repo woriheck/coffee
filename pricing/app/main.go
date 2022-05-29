@@ -30,7 +30,7 @@ func HelloPricing(w http.ResponseWriter, r *http.Request) {
 
 	jsonOut, _ := json.Marshal(
 		Response{
-			Message:         "Pricing service",
+			Message:         "Pricing service:",
 			UpStreamMessage: mp,
 		},
 	)
