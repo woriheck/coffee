@@ -15,8 +15,9 @@ spec:
     spec:
       containers:
       - name: coffee-api
-        image: asia-southeast1-docker.pkg.dev/coffee-dev-351011/coffee/api
-
+        image: coffee/api
+      imagePullSecrets:
+      - name: artifact-repo-key
 ---
 apiVersion: v1
 kind: Service

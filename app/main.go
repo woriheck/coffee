@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Exposing 8080")
 	http.HandleFunc("/", HelloProduct)
 	http.HandleFunc("/pricing", HelloPricing)
 	http.ListenAndServe(":8080", nil)
@@ -18,7 +17,7 @@ type Response struct {
 }
 
 func HelloProduct(w http.ResponseWriter, r *http.Request) {
-	jsonOut, _ := json.Marshal(Response{Message: "Hello DEV?"})
+	jsonOut, _ := json.Marshal(Response{Message: "Hello GUYS?"})
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(200)
 	fmt.Fprintf(w, "%s", jsonOut)

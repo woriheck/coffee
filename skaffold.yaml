@@ -6,19 +6,19 @@ build:
   tagPolicy:
     sha256: {}
   artifacts:
-  - image: asia-southeast1-docker.pkg.dev/coffee-dev-351011/coffee/api
+  - image: coffee/api
     docker:
       dockerfile: Dockerfile.prod
     requires:
-    - image: asia-southeast1-docker.pkg.dev/coffee-dev-351011/coffee/api-builder
+    - image: coffee/api-builder
       alias: BASE
 
-  - image: asia-southeast1-docker.pkg.dev/coffee-dev-351011/coffee/api-builder
+  - image: coffee/api-builder
     docker:
       cacheFrom:
       # googleCloudBuild replaces cache references to the artifact image with
       # the tagged image reference, useful for caching from the previous build.
-      - asia-southeast1-docker.pkg.dev/coffee-dev-351011/coffee/api-builder
+      - coffee/api-builder
       dockerfile: Dockerfile
   googleCloudBuild:
     projectId: coffee-dev-351011
